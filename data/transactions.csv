@@ -1,0 +1,38 @@
+date,merchant,amount,category,description
+2024-09-01,Whole Foods Market,87.43,groceries,Weekly grocery shopping
+2024-09-02,Netflix,15.99,entertainment,Monthly subscription
+2024-09-02,Uber,23.50,transport,Ride to downtown
+2024-09-03,LA Fitness,45.00,fitness,Monthly gym membership
+2024-09-04,Starbucks,5.75,dining,Morning coffee
+2024-09-05,Amazon,156.89,shopping,Electronics and books
+2024-09-05,Shell Gas Station,52.30,transport,Fuel
+2024-09-06,Chipotle,12.45,dining,Lunch
+2024-09-07,Electric Company,125.67,utilities,Monthly electricity bill
+2024-09-08,Target,78.90,shopping,Household items
+2024-09-09,Spotify,9.99,entertainment,Music subscription
+2024-09-10,Trader Joes,64.20,groceries,Weekly groceries
+2024-09-11,Movie Theater,18.50,entertainment,Movie tickets
+2024-09-12,Uber Eats,34.75,dining,Dinner delivery
+2024-09-13,CVS Pharmacy,28.99,health,Medications
+2024-09-14,Apple Store,299.00,shopping,AirPods Pro
+2024-09-15,Costco,234.56,groceries,Bulk shopping
+2024-09-16,Internet Provider,79.99,utilities,Monthly internet
+2024-09-17,Cafe Gratitude,18.30,dining,Brunch
+2024-09-18,Gas Station,48.20,transport,Fuel
+2024-09-19,Nike Store,125.00,shopping,Running shoes
+2024-09-20,Whole Foods Market,92.15,groceries,Weekly shopping
+2024-09-21,Spotify,9.99,entertainment,Music subscription
+2024-09-22,Parking Meter,15.00,transport,Downtown parking
+2024-09-23,Sushi Restaurant,67.80,dining,Dinner with friends
+2024-09-24,Water Bill,42.30,utilities,Monthly water
+2024-09-25,Barnes & Noble,45.99,shopping,Books
+2024-09-26,Trader Joes,58.40,groceries,Weekly groceries
+2024-09-27,Lyft,19.75,transport,Ride home
+2024-09-28,Pizza Hut,28.50,dining,Dinner
+2024-09-29,Amazon Prime,14.99,entertainment,Prime membership
+2024-09-30,Target,89.30,shopping,Clothing
+2024-10-01,Whole Foods Market,95.20,groceries,Weekly shopping
+2024-10-02,Gym,45.00,fitness,Monthly membership
+2024-10-03,Luxury Boutique,450.00,shopping,Designer item
+2024-10-04,Fine Dining Restaurant,280.00,dining,Special occasion
+2024-10-05,Electronics Hub,890.00,shopping,Laptop accessories

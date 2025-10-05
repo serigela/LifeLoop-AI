@@ -92,44 +92,83 @@ lifeloop/
 
 ---
 
-## 🛠️ Getting Started  
+## 🛠️ Getting Started
 
-### 1️⃣ Clone the Repo  
+### 1️⃣ Clone the Repo
 ```bash
 git clone https://github.com/<your-username>/LifeLoop-AI.git
 cd LifeLoop-AI
+```
 
+### 2️⃣ Create Virtual Environment
+```bash
 python3 -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
+```
 
+### 3️⃣ Install Dependencies
+```bash
 pip install -r requirements.txt
+```
 
+### 4️⃣ Configure Environment (Optional)
+```bash
+cp .env.example .env
+# Edit .env and add your OPENAI_API_KEY if you want LLM-powered email summaries
+```
+
+### 5️⃣ Run the Orchestrator
+Start all intelligent agents:
+```bash
+python run.py
+```
+
+This will start:
+- Activity Agent (analyzes routines and patterns)
+- Finance Agent (categorizes expenses and detects anomalies)
+- Email Agent (summarizes messages)
+- Insight Agent (generates holistic insights)
+
+### 6️⃣ Launch the Dashboard
+In a separate terminal, run:
+```bash
 streamlit run dashboard/lifeloop_app.py
+```
 
-Roadmap
+The dashboard will open in your browser at `http://localhost:8501`
 
-✅ v0.1 — Core Agents (Calendar, Finance, Insights)
-🔄 v0.2 — Email Agent + Real-Time Updates
-🚀 v0.3 — Voice Commands & Personalized Scheduling
-🤖 v1.0 — Fully Autonomous Routine Optimization
+---
 
-Future Ideas
-	•	Integrate LangGraph for multi-agent coordination.
-	•	Add sleep + activity prediction models using wearable data.
-	•	Enable voice-based assistant interface (“What should I do next?”).
-	•	Deploy on AWS Lambda + Docker for local/private cloud operation.
+## 🗺️ Roadmap
 
-  Contributing
+- ✅ v0.1 — Core Agents (Calendar, Finance, Insights)
+- 🔄 v0.2 — Email Agent + Real-Time Updates
+- 🚀 v0.3 — Voice Commands & Personalized Scheduling
+- 🤖 v1.0 — Fully Autonomous Routine Optimization
 
-Pull requests are welcome!
-If you’d like to contribute an agent or dataset connector, open an issue or fork the repo.
+## 💡 Future Ideas
 
-License
+- Integrate LangGraph for multi-agent coordination
+- Add sleep + activity prediction models using wearable data
+- Enable voice-based assistant interface ("What should I do next?")
+- Deploy on AWS Lambda + Docker for local/private cloud operation
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome! If you'd like to contribute an agent or dataset connector, open an issue or fork the repo.
+
+---
+
+## 📄 License
 
 MIT License — free for personal and commercial use.
 
-Author
+---
 
-Srijan Erigela
-Gmail: Srijanreddye@gmail.com
-Linkdeln: https://www.linkedin.com/in/serigela/
+## 👤 Author
+
+**Srijan Erigela**
+- Gmail: Srijanreddye@gmail.com
+- LinkedIn: https://www.linkedin.com/in/serigela/

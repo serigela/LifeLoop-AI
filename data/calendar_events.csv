@@ -1,0 +1,45 @@
+date,time,event_type,duration_minutes,location,description
+2024-09-01,07:00,exercise,45,gym,Morning workout
+2024-09-01,09:00,work,480,office,Regular workday
+2024-09-01,19:00,rest,120,home,Evening relaxation
+2024-09-02,07:00,exercise,45,gym,Morning workout
+2024-09-02,09:00,work,480,office,Regular workday
+2024-09-02,19:30,social,90,restaurant,Dinner with friends
+2024-09-03,08:00,rest,60,home,Lazy morning
+2024-09-03,10:00,exercise,60,outdoor,Weekend run
+2024-09-03,14:00,social,180,park,Picnic with family
+2024-09-04,07:00,exercise,45,gym,Morning workout
+2024-09-04,09:00,work,480,office,Regular workday
+2024-09-04,19:00,rest,120,home,Evening relaxation
+2024-09-05,07:00,exercise,45,gym,Morning workout
+2024-09-05,09:00,work,480,office,Regular workday
+2024-09-05,18:30,social,120,cafe,Coffee meeting
+2024-09-06,07:00,exercise,45,gym,Morning workout
+2024-09-06,09:00,work,480,office,Regular workday
+2024-09-06,19:00,rest,120,home,Evening relaxation
+2024-09-07,09:00,rest,180,home,Weekend morning
+2024-09-07,14:00,social,240,outdoor,Hiking trip
+2024-09-08,10:00,rest,120,home,Lazy Sunday
+2024-09-08,14:00,exercise,60,gym,Afternoon workout
+2024-09-08,19:00,social,90,home,Game night
+2024-09-09,07:00,exercise,45,gym,Morning workout
+2024-09-09,09:00,work,480,office,Regular workday
+2024-09-09,19:00,rest,120,home,Evening relaxation
+2024-09-10,07:00,exercise,45,gym,Morning workout
+2024-09-10,09:00,work,480,office,Regular workday
+2024-09-10,18:00,social,150,restaurant,Team dinner
+2024-09-11,07:00,exercise,45,gym,Morning workout
+2024-09-11,09:00,work,480,office,Regular workday
+2024-09-11,19:00,rest,120,home,Evening relaxation
+2024-09-12,07:00,exercise,45,gym,Morning workout
+2024-09-12,09:00,work,480,office,Regular workday
+2024-09-12,19:30,social,120,cinema,Movie night
+2024-09-13,07:00,exercise,45,gym,Morning workout
+2024-09-13,09:00,work,480,office,Regular workday
+2024-09-13,19:00,rest,120,home,Evening relaxation
+2024-09-14,09:00,rest,150,home,Weekend morning
+2024-09-14,13:00,exercise,90,outdoor,Bike ride
+2024-09-14,19:00,social,180,home,Dinner party
+2024-09-15,10:00,rest,120,home,Lazy Sunday
+2024-09-15,15:00,social,120,cafe,Afternoon tea
+2024-09-15,19:00,rest,120,home,Evening relaxation
