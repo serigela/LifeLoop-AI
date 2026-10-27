@@ -1,174 +1,42 @@
-# 🌤️ LifeLoop-AI  
-**AI-Powered Personal Automation & Decision Engine**  
+# LifeLoop AI
 
-![Python Version](https://img.shields.io/badge/python-3.11%2B-blue?logo=python)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Made with ML](https://img.shields.io/badge/Made%20with-Machine%20Learning-orange)
-![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
+A local, multi-agent personal analytics demo. Activity, finance, and email agents publish events to an async message bus. An insight agent combines those events into one summary. The dashboard displays the same analysis alongside the underlying sample records.
 
-LifeLoop AI is a **Python-powered personal automation system** that learns your habits and makes smart, explainable decisions about your daily life — from calendar events and spending to emails, workouts, and sleep patterns.  
+## What works today
 
-Using **machine learning**, **LLMs**, and **local orchestration**, LifeLoop helps you understand yourself better and optimize your day automatically.  
+- Activity clustering with scikit-learn over `data/calendar_events.csv`.
+- Thirty-day spending totals, category breakdown, and simple amount anomaly detection over `data/transactions.csv`.
+- Rule-based summaries of five example emails, with optional OpenAI summarization when configured.
+- One-shot JSON demo, continuous async orchestrator, and Streamlit dashboard.
+- Unit tests covering sample loading and all three domains in the combined insight.
 
----
+The calendar and transaction CSVs are synthetic. Their dates are shifted together so the newest row is today; the original spacing and values stay intact. Email records are examples in code. The project does not connect to a live inbox, calendar, or bank account. Spending categories come from the CSV; the demo classifier is trained on those labels but is not used to generate the spending report. Anomaly flags are descriptive and are not financial advice.
 
-## 🚀 Features  
+## Quick start
 
-### 🧠 Smart Habit Learning  
-- Learns your daily routine using clustering and time-series models.  
-- Predicts your *optimal* time for meetings, workouts, and breaks.  
+Use Python 3.11 or 3.12:
 
-### 💸 Expense Categorization & Insights  
-- Classifies and visualizes your spending automatically with NLP models.  
-- Detects spending anomalies (e.g., “Eating out increased 27% this week”).  
-
-### 📨 Email Summarization & Prioritization  
-- Summarizes unread emails with LLMs (OpenAI API or local models).  
-- Prioritizes senders based on your historic engagement patterns.  
-
-### 💬 Daily AI Insights  
-- Generates natural-language summaries of your behavior:  
-  > “You’ve been working late 3 nights this week. Maybe reschedule your 7AM call tomorrow?”  
-- Merges insights across all domains — time, finance, and focus.  
-
-### 📊 Unified Dashboard  
-- Clean, real-time Python dashboard (Streamlit/Dash) to track habits, tasks, and alerts.  
-- Configurable widgets for transactions, schedules, and AI-generated tips.  
-
----
-
-## 🧩 System Architecture  
-lifeloop/
-├── core/
-│    ├── orchestrator.py         # Central agent scheduler
-│    ├── message_bus.py          # Async communication layer
-├── agents/
-│    ├── activity_agent.py       # Routine and behavior modeling
-│    ├── finance_agent.py        # Transaction classification + anomaly detection
-│    ├── email_agent.py          # LLM summarization + priority scoring
-│    ├── insight_agent.py        # Contextual AI insights + recommendations
-├── data/
-│    ├── calendar_events.db
-│    ├── transactions.csv
-│    ├── email_cache/
-├── dashboard/
-│    └── lifeloop_app.py         # Streamlit dashboard
-├── requirements.txt
-└── README.md
-
----
-
-## ⚙️ Tech Stack  
-
-| Category | Tools & Frameworks |
-|-----------|--------------------|
-| **Core Language** | Python 3.11+ |
-| **ML / AI** | PyTorch, scikit-learn, sentence-transformers, LangChain |
-| **Data Processing** | pandas, NumPy, SQLite |
-| **Automation / Orchestration** | FastAPI, asyncio, Celery |
-| **Visualization** | Streamlit / Dash |
-| **Optional Enhancements** | MLflow, Redis, Whisper (for voice), FAISS (for memory) |
-
----
-
-## 🧠 How It Works  
-
-1. **Data Ingestion:** LifeLoop connects to APIs (Google Calendar, Gmail, or local CSVs) to collect context data.  
-2. **ML Pipeline:** Agents analyze your routines, transactions, and communication patterns.  
-3. **Insight Generation:** A meta-agent aggregates insights and uses an LLM to translate them into readable advice.  
-4. **Dashboard:** Real-time visualization keeps you aware and in control.  
-
----
-
-## 🧪 Example Use Cases  
-
-| Scenario | LifeLoop’s Response |
-|-----------|---------------------|
-| You’ve had 5 late nights | “Reschedule your 7AM meeting tomorrow.” |
-| Coffee spending spikes | “You spent $42 on coffee this week — 60% higher than average.” |
-| Inbox overload | “Summarized 12 unread emails. 3 require urgent replies.” |
-| Missed workouts | “Your average step count dropped 15%. Want to block a gym slot this weekend?” |
-
----
-
-## 🛠️ Getting Started
-
-### 1️⃣ Clone the Repo
 ```bash
-git clone https://github.com/<your-username>/LifeLoop-AI.git
+git clone https://github.com/serigela/LifeLoop-AI.git
 cd LifeLoop-AI
-```
-
-### 2️⃣ Create Virtual Environment
-```bash
-python3 -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-```
-
-### 3️⃣ Install Dependencies
-```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
-```
-
-### 4️⃣ Configure Environment (Optional)
-```bash
-cp .env.example .env
-# Edit .env and add your OPENAI_API_KEY if you want LLM-powered email summaries
-```
-
-### 5️⃣ Run the Orchestrator
-Start all intelligent agents:
-```bash
-python run.py
-```
-
-This will start:
-- Activity Agent (analyzes routines and patterns)
-- Finance Agent (categorizes expenses and detects anomalies)
-- Email Agent (summarizes messages)
-- Insight Agent (generates holistic insights)
-
-### 6️⃣ Launch the Dashboard
-In a separate terminal, run:
-```bash
+python run.py --once
+python -m unittest discover -s tests -v
 streamlit run dashboard/lifeloop_app.py
 ```
 
-The dashboard will open in your browser at `http://localhost:8501`
+`python run.py` starts the long-running agents and writes `lifeloop.log`; stop it with Ctrl+C. The dashboard can run independently. `--once` prints complete JSON without leaving a background process.
 
----
+For optional LLM summaries, install `requirements-llm.txt` and set `OPENAI_API_KEY`. The default demo needs no key or external service.
 
-## 🗺️ Roadmap
+## Architecture
 
-- ✅ v0.1 — Core Agents (Calendar, Finance, Insights)
-- 🔄 v0.2 — Email Agent + Real-Time Updates
-- 🚀 v0.3 — Voice Commands & Personalized Scheduling
-- 🤖 v1.0 — Fully Autonomous Routine Optimization
+`core/message_bus.py` publishes typed events to subscriber queues. `core/orchestrator.py` starts the four agents or executes one complete cycle. `core/sample_data.py` loads and re-dates the bundled CSVs. `agents/insight_agent.py` consumes events and creates the combined summary. `dashboard/lifeloop_app.py` renders that result with sample data for inspection.
 
-## 💡 Future Ideas
+## Next steps
 
-- Integrate LangGraph for multi-agent coordination
-- Add sleep + activity prediction models using wearable data
-- Enable voice-based assistant interface ("What should I do next?")
-- Deploy on AWS Lambda + Docker for local/private cloud operation
+Add real data connectors with explicit user authorization, durable event storage, a supervised category classifier evaluated on held-out merchant records, and user-specific anomaly baselines. These are planned features, not current capabilities.
 
----
-
-## 🤝 Contributing
-
-Pull requests are welcome! If you'd like to contribute an agent or dataset connector, open an issue or fork the repo.
-
----
-
-## 📄 License
-
-MIT License — free for personal and commercial use.
-
----
-
-## 👤 Author
-
-**Srijan Erigela**
-- Gmail: Srijanreddye@gmail.com
-- LinkedIn: https://www.linkedin.com/in/serigela/
+MIT licensed.

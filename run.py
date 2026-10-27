@@ -6,6 +6,7 @@ Launches the orchestrator to run all intelligent agents concurrently.
 import asyncio
 import logging
 import sys
+import json
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -26,6 +27,10 @@ logger = logging.getLogger(__name__)
 
 def main():
     """Main entry point for LifeLoop AI system."""
+    if '--once' in sys.argv:
+        result = asyncio.run(Orchestrator().run_once())
+        print(json.dumps(result, indent=2, allow_nan=False))
+        return
     logger.info("=" * 60)
     logger.info("LifeLoop AI - Personal Automation System")
     logger.info("=" * 60)
