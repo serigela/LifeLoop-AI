@@ -11,6 +11,7 @@ from sklearn.preprocessing import LabelEncoder
 
 from agents.base_agent import BaseAgent
 from core.message_bus import MessageBus
+from core.sample_data import load_transactions
 
 logger = logging.getLogger(__name__)
 
@@ -32,19 +33,10 @@ class FinanceAgent(BaseAgent):
         """Load transaction data and train classification model."""
         logger.info(f"{self.name}: Loading transaction data...")
 
-        np.random.seed(42)
-        categories = ['groceries', 'entertainment', 'transport', 'utilities', 'dining', 'shopping']
-        n_transactions = 200
-
-        self.transactions_df = pd.DataFrame({
-            'timestamp': pd.date_range(start='2024-01-01', periods=n_transactions, freq='D'),
-            'amount': np.random.exponential(50, n_transactions) + 10,
-            'merchant': [f"Merchant_{i%30}" for i in range(n_transactions)],
-            'category': np.random.choice(categories, n_transactions),
-        })
+        self.transactions_df = load_transactions()
 
         self.transactions_df['day_of_week'] = self.transactions_df['timestamp'].dt.dayofweek
-        self.transactions_df['hour'] = np.random.randint(0, 24, n_transactions)
+        self.transactions_df['hour'] = self.transactions_df['timestamp'].dt.hour
 
         self.transactions_df['category_encoded'] = self.label_encoder.fit_transform(
             self.transactions_df['category']
@@ -63,7 +55,7 @@ class FinanceAgent(BaseAgent):
         }
 
         logger.info(f"{self.name}: Loaded {len(self.transactions_df)} transactions")
-        logger.info(f"{self.name}: Trained classification model with {len(categories)} categories")
+        logger.info(f"{self.name}: Trained demo classifier with {self.transactions_df['category'].nunique()} categories")
 
     async def process(self):
         """Analyze recent transactions and detect anomalies."""
@@ -84,7 +76,7 @@ class FinanceAgent(BaseAgent):
             'total_spent': float(recent_transactions['amount'].sum()),
             'transaction_count': int(len(recent_transactions)),
             'category_breakdown': {k: float(v) for k, v in category_spending.items()},
-            'average_transaction': float(recent_transactions['amount'].mean()),
+            'average_transaction': float(recent_transactions['amount'].mean()) if len(recent_transactions) else 0.0,
             'anomalies_detected': int(len(anomalies)),
             'baseline_mean': self.spending_baseline['mean'],
             'analysis_period_days': recent_days

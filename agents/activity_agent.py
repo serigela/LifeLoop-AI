@@ -11,6 +11,7 @@ from sklearn.preprocessing import StandardScaler
 
 from agents.base_agent import BaseAgent
 from core.message_bus import MessageBus
+from core.sample_data import load_activities
 
 logger = logging.getLogger(__name__)
 
@@ -31,17 +32,12 @@ class ActivityAgent(BaseAgent):
         """Load activity data and initialize ML models."""
         logger.info(f"{self.name}: Loading activity data...")
 
-        self.activities_df = pd.DataFrame({
-            'timestamp': pd.date_range(start='2024-01-01', periods=100, freq='H'),
-            'activity_type': np.random.choice(['work', 'exercise', 'social', 'rest'], 100),
-            'duration_minutes': np.random.randint(15, 180, 100),
-            'location': np.random.choice(['home', 'office', 'gym', 'outdoor'], 100),
-        })
+        self.activities_df = load_activities()
 
         self.activities_df['hour'] = self.activities_df['timestamp'].dt.hour
         self.activities_df['day_of_week'] = self.activities_df['timestamp'].dt.dayofweek
 
-        self.kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
+        self.kmeans = KMeans(n_clusters=min(4, len(self.activities_df)), random_state=42, n_init=10)
 
         logger.info(f"{self.name}: Loaded {len(self.activities_df)} activity records")
 
@@ -56,7 +52,7 @@ class ActivityAgent(BaseAgent):
         self.activities_df['routine_cluster'] = clusters
 
         routine_summary = {}
-        for cluster_id in range(4):
+        for cluster_id in range(self.kmeans.n_clusters):
             cluster_data = self.activities_df[self.activities_df['routine_cluster'] == cluster_id]
 
             if len(cluster_data) > 0:

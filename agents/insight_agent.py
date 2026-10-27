@@ -48,19 +48,24 @@ class InsightAgent(BaseAgent):
 
                 logger.info(f"{self.name}: Received {event.event_type} from {event.source_agent}")
 
-                if event.event_type == "activity_summary":
-                    self.collected_insights['activity'] = event.data
-
-                elif event.event_type == "finance_insight":
-                    self.collected_insights['finance'] = event.data
-
-                elif event.event_type == "email_summary":
-                    self.collected_insights['email'] = event.data
+                self.record_event(event)
 
             except asyncio.TimeoutError:
                 continue
             except Exception as e:
                 logger.error(f"{self.name}: Error consuming event: {e}")
+
+    def record_event(self, event: Event):
+        mapping = {"activity_summary": "activity", "finance_insight": "finance",
+                   "email_summary": "email"}
+        key = mapping.get(event.event_type)
+        if key:
+            self.collected_insights[key] = event.data
+
+    def consume_available(self):
+        """Drain queued events for the one-shot demo without a background worker."""
+        while not self.event_queue.empty():
+            self.record_event(self.event_queue.get_nowait())
 
     def _generate_insight_text(self) -> str:
         """Generate natural language insight from collected data."""
