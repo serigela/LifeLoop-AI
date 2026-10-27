@@ -58,6 +58,18 @@ class Orchestrator:
 
         logger.info("All agents running")
 
+    async def run_once(self):
+        """Produce one complete summary from bundled sample data."""
+        self.register_agents()
+        activity, finance, email_agent, insight = self.agents
+        await insight.initialize()
+        for agent in (activity, finance, email_agent):
+            await agent.initialize()
+            await agent.process()
+        insight.consume_available()
+        await insight.process()
+        return insight.get_recent_insights(1)[0]
+
     async def stop_agents(self):
         """Gracefully stop all running agents."""
         logger.info("Stopping all agents...")
